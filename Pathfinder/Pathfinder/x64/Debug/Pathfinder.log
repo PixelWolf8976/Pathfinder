@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\313981545.CODEDOJO\source\repos\Pathfinder\Pathfinder\main.cpp(46,1): warning C4715: 'getChar': not all control paths return a value
+  Pathfinder.vcxproj -> C:\Users\313981545.CODEDOJO\source\repos\Pathfinder\x64\Debug\Pathfinder.exe
