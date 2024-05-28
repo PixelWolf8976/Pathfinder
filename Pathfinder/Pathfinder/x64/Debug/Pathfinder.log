@@ -1,3 +1,11 @@
 ﻿  main.cpp
-C:\Users\313981545.CODEDOJO\source\repos\Pathfinder\Pathfinder\main.cpp(46,1): warning C4715: 'getChar': not all control paths return a value
-  Pathfinder.vcxproj -> C:\Users\313981545.CODEDOJO\source\repos\Pathfinder\x64\Debug\Pathfinder.exe
+C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\Pathfinder\main.cpp(213,83): warning C4244: 'argument': conversion from '_Rep' to '_Ty', possible loss of data
+C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\Pathfinder\main.cpp(213,83): warning C4244:         with
+C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\Pathfinder\main.cpp(213,83): warning C4244:         [
+C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\Pathfinder\main.cpp(213,83): warning C4244:             _Rep=__int64
+C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\Pathfinder\main.cpp(213,83): warning C4244:         ]
+C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\Pathfinder\main.cpp(213,83): warning C4244:         and
+C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\Pathfinder\main.cpp(213,83): warning C4244:         [
+C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\Pathfinder\main.cpp(213,83): warning C4244:             _Ty=double
+C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\Pathfinder\main.cpp(213,83): warning C4244:         ]
+  Pathfinder.vcxproj -> C:\Users\313981545.CODEDOJO\Documents\GitHub\Pathfinder\Pathfinder\x64\Debug\Pathfinder.exe

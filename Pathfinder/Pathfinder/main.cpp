@@ -43,35 +43,41 @@ vector<int> getChar(char c) {
             }
         }
     }
+    return { {} };
 }
 
 void printMap();
 
 chrono::steady_clock::time_point start;
+vector<double> times;
+int loopCount{ 0 };
 
 int main() {
+start:
     vector<int> position = getChar('S');
     start = chrono::steady_clock::now();
 beginning:
-    paths = { {} };
+    paths.clear();
+    paths.resize(map.size(), {});
     for (int y = 0; y < map.size(); y++) {
+        paths[y].resize(map[y].size(), -1);
         for (int x = 0; x < map[y].size(); x++) {
             if (map[y].at(x) == '#') {
-                paths[y].push_back(-1);
+                paths[y][x] = -1;
             }
             else if (map[y].at(x) == 'E') {
-                paths[y].push_back(1);
+                paths[y][x] = 1;
             }
             else {
-                paths[y].push_back(0);
+                paths[y][x] = 0;
             }
         }
-        paths.push_back({});
     }
 
     // Set distances
     //Check for 0s
-    zero_check:
+
+zero_check:
     bool hasZero{ false };
     for (int y = 0; y < paths.size(); y++) {
         for (int x = 0; x < paths[y].size(); x++) {
@@ -87,6 +93,8 @@ beginning:
             break;
         }
     }
+
+    bool foundGoal{ false };
 
     //Un needed calculations ignored if there are no zeros left
     if (hasZero) {
@@ -118,13 +126,26 @@ beginning:
                     if (lowestNeighbor == -1) {
                         // No paths
                     }
+                    else {
+                        if (vector<int>{y, x} == position && ((paths[y - 1][x] != 0 && paths[y - 1][x] != -1) || (paths[y + 1][x] != 0 && paths[y + 1][x] != -1) || (paths[y][x - 1] != 0 && paths[y][x - 1] != -1) || (paths[y][x + 1] != 0 && paths[y][x + 1] != -1))) {
+                            // Found the goal, no need to keep looking(SHOULD always be shortest path)
+                            foundGoal = true;
+                            break;
+                        }
+                    }
 
                     // Set one higher than lowest neighbor
                     paths[y][x] = lowestNeighbor + 1;
                 }
             }
+            if (foundGoal) {
+                break;
+            }
         }
-        goto zero_check;
+
+        if (!foundGoal) {
+            goto zero_check;
+        }
     }
 
     // 0s all gone, move out
@@ -165,22 +186,33 @@ beginning:
     else if (direc == 'r') {
         position[1]++;
     }
-    else {
-        // OH NO
-    }
 
     if (position == getChar('E')) {
         printMap();
+        loopCount++;
+        if (loopCount < 100) {
+            cout << "Done " << loopCount << endl;
+            goto start;
+        }
+        else {
+            double total{ 0 };
+            for (int i = 0; i < times.size(); i++) {
+                total += times[i];
+            }
+            cout << "Average time: " << total / times.size() << " milliseconds";
+        }
     }
-
-    map[position[0]][position[1]] = '*';
-
-    goto beginning;
+    else {
+        map[position[0]][position[1]] = '*';
+        goto beginning;
+    }
 }
 
 void printMap() {
     auto end = chrono::steady_clock::now();
-    auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+    times.push_back(chrono::duration_cast<chrono::milliseconds>(end - start).count());
+
+    /*
     cout << "Printing map" << endl << endl;
     for (int y = 0; y < map.size(); y++) {
         cout << map[y] << endl;
@@ -195,7 +227,8 @@ void printMap() {
     cout << endl << endl;
 
     cout << "Time taken: " << duration.count() << " milliseconds" << endl;
+    */
 
-    string s{};
-    cin >> s;
+    //string s{};
+    //cin >> s;
 }
